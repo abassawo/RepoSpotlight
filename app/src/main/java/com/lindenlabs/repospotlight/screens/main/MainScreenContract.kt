@@ -15,6 +15,10 @@ object MainScreenContract {
 
     }
 
+    sealed class Interaction {
+        data class SpotlightRepoClicked(val repoModel: RepoModel) : Interaction()
+    }
+
     sealed class ViewEvent {
         data class NavigateToDetailScreen(val repoModel: RepoModel) : ViewEvent()
     }

@@ -11,12 +11,12 @@ class SpotlightReposPagingSource @Inject constructor(val appDataSource: AppDataS
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RepoModel> {
         return try {
-            val nextPageNumber = params.key ?: 0
-            val repos = appDataSource.getPopularRepos(nextPageNumber)
+            val pageNumber = params.key ?: 0
+            val repos = appDataSource.getPopularRepos(pageNumber)
             LoadResult.Page(
                 data = repos,
-                prevKey = if (nextPageNumber == 0) null else nextPageNumber - 1,
-                nextKey = if (repos.isEmpty()) null else nextPageNumber + 1
+                prevKey = if (pageNumber == 0) null else pageNumber - 1,
+                nextKey = if (repos.isEmpty()) null else pageNumber + 1
             )
         } catch (e: Exception) {
             LoadResult.Error(e)

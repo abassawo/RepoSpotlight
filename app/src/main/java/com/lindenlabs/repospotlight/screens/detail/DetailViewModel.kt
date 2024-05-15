@@ -17,6 +17,10 @@ class DetailViewModel @Inject constructor(val appDataSource: AppDataSource) : Vi
     private val mutableViewState =
         MutableStateFlow<DetailContract.ViewState>(DetailContract.ViewState.Loading)
     val viewState: StateFlow<DetailContract.ViewState> = mutableViewState
+
+    private val mutableViewEvent =
+        MutableStateFlow<DetailContract.ViewEvent?>(null)
+    val viewEvent: StateFlow<DetailContract.ViewEvent?> = mutableViewEvent
     fun init(repoModel: RepoModel) {
         this.repo = repoModel
         viewModelScope.launch {
@@ -33,6 +37,12 @@ class DetailViewModel @Inject constructor(val appDataSource: AppDataSource) : Vi
                     Timber.e(it)
                     mutableViewState.value = DetailContract.ViewState.Failure
                 }
+        }
+    }
+
+    fun handleInteraction(interaction: DetailContract.Interaction) {
+        when(interaction) {
+            is DetailContract.Interaction.ViewRepoClicked -> mutableViewEvent.value = DetailContract.ViewEvent.ShowCustomChromeTab(interaction.repoModel)
         }
     }
 }

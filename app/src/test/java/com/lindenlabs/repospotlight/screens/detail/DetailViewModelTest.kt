@@ -64,7 +64,19 @@ class DetailViewModelTest {
         assertEquals(DetailContract.ViewState.Content(TestData.contributors), underTest.viewState.value)
     }
 
+    @Test
+    fun `handling view repo interaction yields opening custom chrome tab`() {
+        val repoModel = TestData.repoModel
+        testDispatcher.runBlockingTest {
+            arrangeBuilder.withNonEmptyContributors(repoModel)
+        }
+        underTest.init(repoModel)
+        underTest.handleInteraction(DetailContract.Interaction.ViewRepoClicked(repoModel))
+        assertEquals(DetailContract.ViewEvent.ShowCustomChromeTab(repoModel), underTest.viewEvent.value)
+    }
+
     inner class ArrangeBuilder {
+
         suspend fun withEmptyContributors(repoModel: RepoModel) = also {
             whenever(mockDataSource.getTopContributors(repoModel)).thenReturn(emptyList())
         }

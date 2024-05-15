@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
+import com.lindenlabs.repospotlight.screens.main.MainScreenContract.Interaction
 import com.lindenlabs.repospotlight.ui.components.GenericBox
 import com.lindenlabs.repospotlight.ui.components.LoadingView
 import com.lindenlabs.repospotlight.ui.components.spotlight.RepoCard
@@ -23,15 +24,12 @@ fun MainScreen(appNavigator: AppNavigator, modifier: Modifier) {
     val viewModel = hiltViewModel<MainViewModel>()
     val viewState = viewModel.viewState.collectAsState().value
 
-    val viewEvent = viewModel.viewEvent.collectAsState().value
+    val viewEvent = viewModel.viewEvent.collectAsState(initial = null).value
 
     when (viewEvent) {
-        is MainScreenContract.ViewEvent.NavigateToDetailScreen -> appNavigator.navigate(
-            Screen.Detail(
-                viewEvent.repoModel
-            )
-        )
-
+        is MainScreenContract.ViewEvent.NavigateToDetailScreen -> {
+            appNavigator.navigate(Screen.Detail(viewEvent.repoModel))
+        }
         null -> Unit
     }
 
@@ -58,9 +56,12 @@ fun SpotlightReposScreen(
     Box(modifier) {
         LazyColumn(Modifier.fillMaxSize(), state = scrollState) {
             items(viewEntities) { viewEntity ->
+                val repo = viewEntity.repoModel
                 RepoCard(
-                    repoModel = viewEntity.repoModel
-                ) { viewEntity.clickAction(viewEntity.repoModel) }
+                    repoModel = repo
+                ) {
+                    viewModel.handleInteraction(Interaction.SpotlightRepoClicked(repo))
+                }
 
             }
         }

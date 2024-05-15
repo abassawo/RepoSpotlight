@@ -20,6 +20,6 @@ object DetailContract {
     }
 
     sealed class ViewEvent {
-        data class ShowCustomChromeTab(val repoModel: RepoModel) : Interaction()
+        data class ShowCustomChromeTab(val repoModel: RepoModel) : ViewEvent()
     }
 }

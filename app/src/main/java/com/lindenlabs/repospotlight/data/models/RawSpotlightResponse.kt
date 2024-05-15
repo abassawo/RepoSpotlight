@@ -13,12 +13,12 @@ data class RepoModel(
     val description: String?,
     val nodeId: String?,
     val name: String?,
-    val fullName: String?,
+    @SerializedName("full_name") val fullName: String?,
     val private: Boolean?,
     val owner: OwnerModel?,
     @SerializedName("contributors_url") val contributorsUrl: String?,
     val topics: List<String>?,
-    val starGazersCount: Int?,
+    @SerializedName("stargazers_count") val starGazersCount: Int?,
     @SerializedName("html_url") val htmlUrl: String
 )
 

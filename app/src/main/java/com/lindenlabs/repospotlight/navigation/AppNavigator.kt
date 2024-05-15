@@ -5,7 +5,7 @@ import com.lindenlabs.repospotlight.data.models.RepoModel
 import com.lindenlabs.repospotlight.ui.components.navigation.BottomNavigationEntity
 import javax.inject.Inject
 
-class AppNavigator @Inject constructor(val navController: NavHostController) {
+class AppNavigator (val navController: NavHostController) {
     var selectedRepo: RepoModel? = null
     fun isScreenSet(bottomNavigationItem: BottomNavigationEntity): Boolean {
         return navController.currentDestination?.route == bottomNavigationItem.screen.route
@@ -14,7 +14,7 @@ class AppNavigator @Inject constructor(val navController: NavHostController) {
     fun navigate(screen: Screen.Detail) {
         this.selectedRepo = screen.repoModel
         navController.navigate(screen.route) {
-            launchSingleTop = true
+            launchSingleTop = false
         }
     }
 

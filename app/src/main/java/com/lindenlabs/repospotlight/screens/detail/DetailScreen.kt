@@ -32,6 +32,12 @@ fun DetailScreen(appNavigator: AppNavigator, modifier: Modifier) {
         val viewModel = hiltViewModel<DetailViewModel>()
         val viewState = viewModel.viewState.collectAsState().value
 
+        val viewEvent = viewModel.viewEvent.collectAsState().value
+        when (viewEvent) {
+            is DetailContract.ViewEvent.ShowCustomChromeTab -> context.openChromeCustomTab(repo)
+            null -> Unit
+        }
+
 
         LaunchedEffect(Unit) {
             viewModel.init(repo)
@@ -50,7 +56,7 @@ fun DetailScreen(appNavigator: AppNavigator, modifier: Modifier) {
             }
             Button(
                 onClick = {
-                    context.openChromeCustomTab(repo)
+                    viewModel.handleInteraction(DetailContract.Interaction.ViewRepoClicked(repo))
                 }, modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .wrapContentSize()
