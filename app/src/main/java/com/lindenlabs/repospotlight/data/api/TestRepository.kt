@@ -1,8 +1,9 @@
-package com.lindenlabs.repospotlight.data
+package com.lindenlabs.repospotlight.data.api
 
 import android.content.Context
 import com.google.gson.Gson
 import com.lindenlabs.repospotlight.R
+import com.lindenlabs.repospotlight.data.models.Contributor
 import com.lindenlabs.repospotlight.data.models.RawSpotlightResponse
 import com.lindenlabs.repospotlight.data.models.RepoModel
 import java.io.InputStreamReader
@@ -16,5 +17,9 @@ class TestRepository(val context: Context) : AppDataSource {
         val reader = InputStreamReader(inputStream)
         val rawSpotlightResponse = Gson().fromJson(reader, RawSpotlightResponse::class.java)
         return rawSpotlightResponse.items
+    }
+
+    override suspend fun getTopContributors(repoModel: RepoModel): List<Contributor> {
+        return listOf(Contributor("Username", "id", "avatar", "url", 500))
     }
 }

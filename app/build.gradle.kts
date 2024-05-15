@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation("io.coil-kt:coil-compose:2.6.0")
     val timberVersion = "5.0.1"
     implementation("com.jakewharton.timber:timber:$timberVersion")
     val retrofitVersion = "2.11.0"

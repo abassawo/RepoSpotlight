@@ -21,14 +21,10 @@ import com.lindenlabs.repospotlight.utils.DestinationAccessHelper
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun App(appNavigator: AppNavigator) {
-    val navController = appNavigator.navController
-    val navBackStackEntry = navController.currentBackStackEntryAsState().value
-    val currentDestination = navBackStackEntry?.destination?.route ?: ""
-
     Scaffold(
         contentWindowInsets = WindowInsets(0, 0, 0, 16),
         topBar = {
-            AppToolbar(DestinationAccessHelper.canShowBackIcon(currentDestination)) {
+            AppToolbar(appNavigator) {
                 appNavigator.goBack()
             }
         },
@@ -36,7 +32,6 @@ fun App(appNavigator: AppNavigator) {
 
         }
     ) { paddingValues ->
-
         NavHost(
             navController = appNavigator.navController,
             startDestination = Screen.Home.route

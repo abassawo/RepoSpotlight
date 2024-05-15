@@ -1,5 +1,6 @@
 package com.lindenlabs.repospotlight.ui.components.spotlight
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,15 +28,20 @@ import com.lindenlabs.repospotlight.data.models.RepoModel
 import com.lindenlabs.repospotlight.ui.theme.Dimens
 
 @Composable
-fun RepoCard(repoModel: RepoModel, modifier: Modifier) {
+fun RepoCard(repoModel: RepoModel, clickAction: (repo: RepoModel) -> Unit) {
     Card(
         Modifier
             .fillMaxWidth()
             .padding(Dimens.defaultSpacing)
             .height(150.dp)
+            .clickable { clickAction(repoModel) }
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            Column(modifier.weight(1f)) {
+            Column(
+                Modifier
+                    .padding(horizontal = Dimens.defaultSpacing)
+                    .weight(1f)
+            ) {
                 Text(
                     text = repoModel.name ?: "",
                     style = TextStyle(
@@ -58,9 +64,16 @@ fun RepoCard(repoModel: RepoModel, modifier: Modifier) {
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
-                    modifier = modifier.padding(top = 8.dp)
+                    modifier =
+                    Modifier
+                        .padding(horizontal = Dimens.defaultSpacing)
+                        .padding(top = 8.dp)
                 )
-                LazyRow(modifier = modifier.padding(bottom = Dimens.defaultSpacing)) {
+                LazyRow(
+                    modifier = Modifier
+                        .padding(horizontal = Dimens.defaultSpacing)
+                        .padding(bottom = Dimens.defaultSpacing)
+                ) {
                     items(repoModel.topics) { topic ->
                         val isAndroidRelated = topic.contains("Android", ignoreCase = true)
                         val textStyle = if (isAndroidRelated) {

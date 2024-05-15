@@ -2,7 +2,7 @@ package com.lindenlabs.repospotlight.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.lindenlabs.repospotlight.data.AppDataSource
+import com.lindenlabs.repospotlight.data.api.AppDataSource
 import com.lindenlabs.repospotlight.data.models.RepoModel
 import javax.inject.Inject
 

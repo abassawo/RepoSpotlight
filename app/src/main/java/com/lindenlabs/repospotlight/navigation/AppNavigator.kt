@@ -14,7 +14,7 @@ class AppNavigator @Inject constructor(val navController: NavHostController) {
     fun navigate(screen: Screen.Detail) {
         this.selectedRepo = screen.repoModel
         navController.navigate(screen.route) {
-            launchSingleTop = false
+            launchSingleTop = true
         }
     }
 

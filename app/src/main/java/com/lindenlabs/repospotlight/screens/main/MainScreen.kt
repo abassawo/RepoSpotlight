@@ -1,10 +1,8 @@
 package com.lindenlabs.repospotlight.screens.main
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -16,7 +14,6 @@ import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
 import com.lindenlabs.repospotlight.ui.components.GenericBox
 import com.lindenlabs.repospotlight.ui.components.spotlight.RepoCard
-import com.lindenlabs.repospotlight.ui.theme.Dimens
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 
@@ -61,11 +58,9 @@ fun SpotlightReposScreen(
         LazyColumn(Modifier.fillMaxSize(), state = scrollState) {
             items(viewEntities) { viewEntity ->
                 RepoCard(
-                    repoModel = viewEntity.repoModel,
-                    Modifier
-                        .padding(horizontal = Dimens.defaultSpacing)
-                        .clickable { viewEntity.clickAction(viewEntity.repoModel) }
-                )
+                    repoModel = viewEntity.repoModel
+                ) { viewEntity.clickAction(viewEntity.repoModel) }
+
             }
         }
         if (scrollState.canScrollForward.not()) {

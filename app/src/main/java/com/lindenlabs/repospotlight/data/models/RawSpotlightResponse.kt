@@ -1,5 +1,7 @@
 package com.lindenlabs.repospotlight.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class RawSpotlightResponse(
     val totalCount: Int,
     val incompleteResults: Boolean,
@@ -14,10 +16,10 @@ data class RepoModel(
     val fullName: String?,
     val private: Boolean?,
     val owner: OwnerModel?,
-    val collaboratorsUrl: String?,
+    @SerializedName("contributors_url") val contributorsUrl: String?,
     val topics: List<String>?,
     val starGazersCount: Int?
-)
+)sealed class
 
 data class OwnerModel(
     val login: String,
