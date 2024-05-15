@@ -23,7 +23,6 @@ class MainActivity : ComponentActivity() {
             RepoSpotlightTheme {
                 // A surface container using the 'background' color from the theme
                 val appNavigator = AppNavigator(rememberNavController())
-//                    AppNavigator(rememberNavController().also { controller ->
 
                 val viewModel: MainViewModel = hiltViewModel()
                 LaunchedEffect(Unit) {

@@ -17,7 +17,7 @@ import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
 import timber.log.Timber
 
-internal data class BottomNavigationEntity(
+data class BottomNavigationEntity(
     val label: String,
     val screen: Screen,
     val unselectedIcon: Int,
@@ -43,7 +43,7 @@ internal fun AppBottomToolbar(
                 BottomNavigationBarItem(
                     bottomNavigationItem = bottomNavigationItem,
                     navHostController = appNavigator.navController,
-                    isSelected = bottomNavigationItem.screen == appNavigator.screen,
+                    isSelected = appNavigator.isScreenSet(bottomNavigationItem),
                     onClick = {
 //                        onTabSelected(it.route.ordinal)
                     },

@@ -64,13 +64,16 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     val timberVersion = "5.0.1"
     implementation("com.jakewharton.timber:timber:$timberVersion")
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.google.dagger:hilt-android:2.44")
+
+    val retrofitVersion = "2.11.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.google.dagger:hilt-android:2.48")
     val hiltNavCompose =  "1.0.0"
     implementation(
         "androidx.hilt:hilt-navigation-compose:${hiltNavCompose}")
 
-    kapt("com.google.dagger:hilt-compiler:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.48")
 
     val navCompose = "2.6.0-alpha03"
     implementation("androidx.navigation:navigation-compose:${navCompose}")
@@ -84,4 +87,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+kapt {
+    correctErrorTypes = true
 }

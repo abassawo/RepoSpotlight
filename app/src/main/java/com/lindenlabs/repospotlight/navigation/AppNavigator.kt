@@ -1,6 +1,7 @@
 package com.lindenlabs.repospotlight.navigation
 
 import androidx.navigation.NavHostController
+import com.lindenlabs.repospotlight.ui.components.BottomNavigationEntity
 import javax.inject.Inject
 
 interface AppNavigation {
@@ -8,5 +9,7 @@ interface AppNavigation {
 }
 
 class AppNavigator @Inject constructor(val navController: NavHostController) {
-    var screen: Screen = Screen.Splash
+    fun isScreenSet(bottomNavigationItem: BottomNavigationEntity): Boolean {
+        return navController.currentDestination?.route == bottomNavigationItem.screen.route
+    }
 }
