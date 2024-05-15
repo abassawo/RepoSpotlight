@@ -31,6 +31,8 @@ fun DetailScreen(appNavigator: AppNavigator, modifier: Modifier) {
         val context = LocalContext.current
         val viewModel = hiltViewModel<DetailViewModel>()
         val viewState = viewModel.viewState.collectAsState().value
+
+
         LaunchedEffect(Unit) {
             viewModel.init(repo)
         }

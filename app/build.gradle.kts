@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.browser:browser:1.3.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     val timberVersion = "5.0.1"
     implementation("com.jakewharton.timber:timber:$timberVersion")
     val retrofitVersion = "2.11.0"
@@ -79,10 +80,17 @@ dependencies {
 
     val navCompose = "2.6.0-alpha03"
     implementation("androidx.navigation:navigation-compose:${navCompose}")
+
+    val coroutinesTestVersion = "1.6.0"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesTestVersion}\",")
+
     val leakCanaryVersion = "2.10"
     debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")
 
     testImplementation(libs.junit)
+
+    val mockitoVersion = "4.4.0"
+    testImplementation("org.mockito:mockito-core:${mockitoVersion}",)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

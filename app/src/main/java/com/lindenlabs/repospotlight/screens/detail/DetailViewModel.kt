@@ -22,14 +22,17 @@ class DetailViewModel @Inject constructor(val appDataSource: AppDataSource) : Vi
         viewModelScope.launch {
             runCatching { appDataSource.getTopContributors(repoModel) }
                 .onSuccess { contributors ->
-                    Timber.d("Response contributors:" + contributors)
-                    mutableViewState.value = DetailContract.ViewState.Content(contributors)
+                    if (contributors.isEmpty()) {
+                        mutableViewState.value = DetailContract.ViewState.Empty
+                    } else {
+                        Timber.d("Response contributors:" + contributors)
+                        mutableViewState.value = DetailContract.ViewState.Content(contributors)
+                    }
                 }
                 .onFailure {
                     Timber.e(it)
                     mutableViewState.value = DetailContract.ViewState.Failure
                 }
         }
-
     }
 }
