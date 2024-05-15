@@ -18,10 +18,15 @@ data class RepoModel(
     val owner: OwnerModel?,
     @SerializedName("contributors_url") val contributorsUrl: String?,
     val topics: List<String>?,
-    val starGazersCount: Int?
-)sealed class
+    val starGazersCount: Int?,
+    @SerializedName("html_url") val htmlUrl: String
+)
 
-data class OwnerModel(
+sealed class
+
+data
+
+class OwnerModel(
     val login: String,
     val id: String,
     val nodeId: String,

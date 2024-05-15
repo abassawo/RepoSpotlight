@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
 import com.lindenlabs.repospotlight.ui.components.GenericBox
+import com.lindenlabs.repospotlight.ui.components.LoadingView
 import com.lindenlabs.repospotlight.ui.components.spotlight.RepoCard
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -36,7 +37,7 @@ fun MainScreen(appNavigator: AppNavigator, modifier: Modifier) {
 
     when (viewState) {
         is MainScreenContract.ViewState.ErrorState -> GenericBox(title = "Error")
-        MainScreenContract.ViewState.Loading -> GenericBox(title = "Loading")
+        MainScreenContract.ViewState.Loading -> LoadingView()
         MainScreenContract.ViewState.Empty -> GenericBox(title = "Nothing to see here!")
         is MainScreenContract.ViewState.Spotlight -> SpotlightReposScreen(
             viewModel,
