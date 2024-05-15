@@ -3,7 +3,6 @@ package com.lindenlabs.repospotlight.ui.components
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,7 +23,6 @@ fun AppToolbar(action: () -> Unit) {
                 }
             ) {
                 Icon(
-                    // internal hamburger menu
                     Icons.Default.Star,
                     contentDescription = "MenuButton",
                     tint = Color.White,
@@ -36,15 +34,6 @@ fun AppToolbar(action: () -> Unit) {
             Text(text = "Repo Spotlight", color = Color.White)
         },
         endAccessory = {
-//            IconButton(onClick = {}) {
-//                Icon(
-//                    imageVector = Icons.Default.Search,
-//                    contentDescription = null,
-//                    tint = Color.White,
-//                    modifier = Modifier.size(28.dp)
-//                )
-//            }
-
 
         }
     )

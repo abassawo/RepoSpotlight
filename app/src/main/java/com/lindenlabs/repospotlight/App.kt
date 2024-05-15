@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
-import com.lindenlabs.repospotlight.screens.TopReposListScreen
+import com.lindenlabs.repospotlight.screens.main.MainScreen
 import com.lindenlabs.repospotlight.ui.components.AppToolbar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -32,7 +32,7 @@ fun App(appNavigator: AppNavigator) {
             modifier = androidx.compose.ui.Modifier.padding(paddingValues)
         ) {
             composable(route = Screen.Home.route) {
-                TopReposListScreen()
+                MainScreen()
             }
         }
     }

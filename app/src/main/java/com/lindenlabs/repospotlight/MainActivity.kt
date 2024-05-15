@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.lindenlabs.repospotlight.navigation.AppNavigator
+import com.lindenlabs.repospotlight.screens.main.MainViewModel
 import com.lindenlabs.repospotlight.ui.theme.RepoSpotlightTheme
 import dagger.hilt.android.AndroidEntryPoint
 
