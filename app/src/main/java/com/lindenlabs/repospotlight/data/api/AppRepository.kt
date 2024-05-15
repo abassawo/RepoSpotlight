@@ -13,7 +13,7 @@ import java.io.IOException
 
 class AppRepository : AppDataSource {
     override suspend fun getPopularRepos(page: Int): List<RepoModel> {
-        return api.popularRepos(page, pageSize = page * 25).items
+        return api.popularRepos(page).items
     }
 
     override suspend fun getTopContributors(repoModel: RepoModel): List<Contributor> {

@@ -26,16 +26,17 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.lindenlabs.repospotlight.R
 import com.lindenlabs.repospotlight.data.models.RepoModel
+import com.lindenlabs.repospotlight.screens.main.SpotlightRepoViewEntity
 import com.lindenlabs.repospotlight.ui.theme.Dimens
 
 @Composable
-fun RepoCard(repoModel: RepoModel, clickAction: (repo: RepoModel) -> Unit) {
+fun RepoCard(viewEntity: SpotlightRepoViewEntity, clickAction: (repo: RepoModel) -> Unit) {
     Card(
         Modifier
             .fillMaxWidth()
             .padding(Dimens.defaultSpacing)
             .height(160.dp)
-            .clickable { clickAction(repoModel) }
+            .clickable { clickAction(viewEntity.repoModel) }
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(
@@ -44,7 +45,7 @@ fun RepoCard(repoModel: RepoModel, clickAction: (repo: RepoModel) -> Unit) {
                     .weight(1f)
             ) {
                 Text(
-                    text = repoModel.name ?: "",
+                    text = viewEntity.repoName,
                     style = TextStyle(
                         fontSize = TextUnit(Dimens.looseSpacing.value, TextUnitType.Sp)
                     ),
@@ -54,12 +55,12 @@ fun RepoCard(repoModel: RepoModel, clickAction: (repo: RepoModel) -> Unit) {
                     modifier = Modifier.padding(top = Dimens.tightestSpacing)
                 )
                 Text(
-                    text = repoModel.description ?: "",
+                    text = viewEntity.description ?: "",
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
-            if (repoModel.topics?.isNotEmpty() == true) {
+            if (viewEntity.topics.isNotEmpty()) {
                 Text(
                     text = stringResource(id = R.string.topics),
                     maxLines = 1,
@@ -75,7 +76,7 @@ fun RepoCard(repoModel: RepoModel, clickAction: (repo: RepoModel) -> Unit) {
                         .padding(horizontal = Dimens.defaultSpacing)
                         .padding(bottom = Dimens.defaultSpacing)
                 ) {
-                    items(repoModel.topics) { topic ->
+                    items(viewEntity.topics) { topic ->
                         val isAndroidRelated = topic.contains("Android", ignoreCase = true)
                         val textStyle = if (isAndroidRelated) {
                             LocalTextStyle.current.copy(
@@ -96,7 +97,7 @@ fun RepoCard(repoModel: RepoModel, clickAction: (repo: RepoModel) -> Unit) {
                 }
             }
             Text(
-                text = "Stargazers: ${repoModel.starGazersCount}", modifier = Modifier
+                text = viewEntity.starGazersText, modifier = Modifier
                     .align(Alignment.End)
                     .padding(horizontal = Dimens.defaultSpacing)
                     .padding(bottom = Dimens.defaultSpacing)

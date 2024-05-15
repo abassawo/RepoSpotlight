@@ -1,6 +1,7 @@
 package com.lindenlabs.repospotlight.screens.main
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,6 +10,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
@@ -18,7 +20,6 @@ import com.lindenlabs.repospotlight.ui.components.LoadingView
 import com.lindenlabs.repospotlight.ui.components.spotlight.RepoCard
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-
 @Composable
 fun MainScreen(appNavigator: AppNavigator, modifier: Modifier) {
     val viewModel = hiltViewModel<MainViewModel>()
@@ -41,7 +42,10 @@ fun MainScreen(appNavigator: AppNavigator, modifier: Modifier) {
             viewModel,
             viewState.viewEntities,
             modifier
-        )
+        ).also {
+            Toast.makeText(LocalContext.current, "Size was ${viewState.viewEntities.size}", Toast.LENGTH_LONG).show()
+
+        }
     }
 
 }
@@ -58,7 +62,7 @@ fun SpotlightReposScreen(
             items(viewEntities) { viewEntity ->
                 val repo = viewEntity.repoModel
                 RepoCard(
-                    repoModel = repo
+                    viewEntity
                 ) {
                     viewModel.handleInteraction(Interaction.SpotlightRepoClicked(repo))
                 }

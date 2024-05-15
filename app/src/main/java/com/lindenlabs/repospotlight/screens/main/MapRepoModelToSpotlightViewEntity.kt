@@ -13,7 +13,10 @@ class MapRepoModelToSpotlightViewEntity @Inject constructor() {
 
     private fun RepoModel.toViewEntity(): SpotlightRepoViewEntity {
         return SpotlightRepoViewEntity(
-            this,
+            repoName = this.name ?: "",
+            description = this.description ?: "",
+            starGazersText = "Stargazers: ${this.starGazersCount}",
+            repoModel = this,
             isRelatedToAndroid = topics?.isAndroidRelated() == true
         )
     }
