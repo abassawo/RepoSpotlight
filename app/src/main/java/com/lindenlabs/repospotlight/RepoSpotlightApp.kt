@@ -1,8 +1,10 @@
 package com.lindenlabs.repospotlight
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class RepoSpotlight : Application() {
+@HiltAndroidApp
+class RepoSpotlightApp : Application() {
 
     override fun onCreate() {
         super.onCreate()

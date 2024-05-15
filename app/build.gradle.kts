@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+//    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -53,7 +53,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,9 +61,21 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    val timberVersion = "5.0.1"
+    implementation("com.jakewharton.timber:timber:$timberVersion")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.google.dagger:hilt-android:2.44")
+    val hiltNavCompose =  "1.0.0"
+    implementation(
+        "androidx.hilt:hilt-navigation-compose:${hiltNavCompose}")
+
     kapt("com.google.dagger:hilt-compiler:2.44")
+
+    val navCompose = "2.6.0-alpha03"
+    implementation("androidx.navigation:navigation-compose:${navCompose}")
+    val leakCanaryVersion = "2.10"
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
