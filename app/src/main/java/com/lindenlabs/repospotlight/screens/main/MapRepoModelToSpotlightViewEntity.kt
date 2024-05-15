@@ -12,7 +12,7 @@ class MapRepoModelToSpotlightViewEntity @Inject constructor() {
     private fun RepoModel.toViewEntity(): SpotlightRepoViewEntity {
         return SpotlightRepoViewEntity(
             this,
-            isRelatedToAndroid = topics.isAndroidRelated()
+            isRelatedToAndroid = topics?.isAndroidRelated() == true
         )
     }
 

@@ -1,4 +1,4 @@
-package com.lindenlabs.repospotlight.ui.components
+package com.lindenlabs.repospotlight.ui.components.spotlight
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +38,7 @@ fun RepoCard(repoModel: RepoModel) {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(modifier.weight(1f)) {
                 Text(
-                    text = repoModel.name,
+                    text = repoModel.name ?: "",
                     style = TextStyle(
                         fontSize = TextUnit(Dimens.looseSpacing.value, TextUnitType.Sp)
                     ),
@@ -48,12 +48,12 @@ fun RepoCard(repoModel: RepoModel) {
                     modifier = Modifier.padding(top = Dimens.tightestSpacing)
                 )
                 Text(
-                    text = repoModel.description,
+                    text = repoModel.description ?: "",
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
-            if (repoModel.topics.isNotEmpty()) {
+            if (repoModel.topics?.isNotEmpty() == true) {
                 Text(
                     text = stringResource(id = R.string.topics),
                     maxLines = 1,

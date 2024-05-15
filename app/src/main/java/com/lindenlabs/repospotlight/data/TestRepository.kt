@@ -8,7 +8,8 @@ import com.lindenlabs.repospotlight.data.models.RepoModel
 import java.io.InputStreamReader
 
 class TestRepository(val context: Context) : AppDataSource {
-    override suspend fun getPopularRepos(): List<RepoModel> {
+
+    override suspend fun getPopularRepos(page: Int): List<RepoModel> {
         val inputStream =
             context.resources.openRawResource(R.raw.spotlight_repos_200) // Replace `your_json_file` with the actual filename without extension
 

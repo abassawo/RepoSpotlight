@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation("androidx.paging:paging-compose:1.0.0-alpha12")
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
@@ -64,7 +65,6 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     val timberVersion = "5.0.1"
     implementation("com.jakewharton.timber:timber:$timberVersion")
-
     val retrofitVersion = "2.11.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")

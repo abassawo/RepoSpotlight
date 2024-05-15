@@ -7,12 +7,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 interface AppDataSource {
-    suspend fun getPopularRepos(): List<RepoModel>
+    suspend fun getPopularRepos(page: Int): List<RepoModel>
 }
 
 class AppRepository : AppDataSource {
-    override suspend fun getPopularRepos(): List<RepoModel> {
-        return api.popularRepos().items
+    override suspend fun getPopularRepos(page: Int): List<RepoModel> {
+        return api.popularRepos(page, pageSize = page * 25).items
     }
 
     companion object {

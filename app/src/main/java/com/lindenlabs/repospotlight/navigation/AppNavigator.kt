@@ -1,7 +1,7 @@
 package com.lindenlabs.repospotlight.navigation
 
 import androidx.navigation.NavHostController
-import com.lindenlabs.repospotlight.ui.components.BottomNavigationEntity
+import com.lindenlabs.repospotlight.ui.components.navigation.BottomNavigationEntity
 import javax.inject.Inject
 
 interface AppNavigation {

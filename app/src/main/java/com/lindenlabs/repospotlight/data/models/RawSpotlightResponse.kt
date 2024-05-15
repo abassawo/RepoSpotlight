@@ -7,16 +7,16 @@ data class RawSpotlightResponse(
 )
 
 data class RepoModel(
-    val id: String,
-    val description: String,
-    val nodeId: String,
-    val name: String,
-    val fullName: String,
-    val private: Boolean,
-    val owner: OwnerModel,
-    val collaboratorsUrl: String,
-    val topics: List<String>,
-    val starGazersCount: Int
+    val id: String?,
+    val description: String?,
+    val nodeId: String?,
+    val name: String?,
+    val fullName: String?,
+    val private: Boolean?,
+    val owner: OwnerModel?,
+    val collaboratorsUrl: String?,
+    val topics: List<String>?,
+    val starGazersCount: Int?
 )
 
 data class OwnerModel(

@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import com.lindenlabs.repospotlight.navigation.AppNavigator
 import com.lindenlabs.repospotlight.navigation.Screen
 import com.lindenlabs.repospotlight.screens.main.MainScreen
-import com.lindenlabs.repospotlight.ui.components.AppToolbar
+import com.lindenlabs.repospotlight.ui.components.navigation.AppToolbar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

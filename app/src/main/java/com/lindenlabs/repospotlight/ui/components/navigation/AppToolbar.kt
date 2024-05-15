@@ -1,4 +1,4 @@
-package com.lindenlabs.repospotlight.ui.components
+package com.lindenlabs.repospotlight.ui.components.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.size
@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.lindenlabs.repospotlight.ui.components.ThreeItemAppBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

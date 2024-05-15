@@ -1,4 +1,4 @@
-package com.lindenlabs.repospotlight.ui.components
+package com.lindenlabs.repospotlight.ui.components.navigation
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
