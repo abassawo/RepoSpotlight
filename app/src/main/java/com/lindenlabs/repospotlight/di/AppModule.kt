@@ -3,7 +3,7 @@ package com.lindenlabs.repospotlight.di
 import android.app.Application
 import android.content.Context
 import com.lindenlabs.repospotlight.data.AppDataSource
-import com.lindenlabs.repospotlight.data.AppRepository
+import com.lindenlabs.repospotlight.data.TestRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,5 +18,5 @@ object AppModule {
 
 
     @Provides
-    fun provideAppDataSource(): AppDataSource = AppRepository()
+    fun provideAppDataSource(context: Context): AppDataSource = TestRepository(context)
 }

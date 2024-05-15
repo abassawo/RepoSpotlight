@@ -27,8 +27,7 @@ import com.lindenlabs.repospotlight.data.models.RepoModel
 import com.lindenlabs.repospotlight.ui.theme.Dimens
 
 @Composable
-fun RepoCard(repoModel: RepoModel) {
-    val modifier = Modifier.padding(horizontal = Dimens.defaultSpacing)
+fun RepoCard(repoModel: RepoModel, modifier: Modifier) {
     Card(
         Modifier
             .fillMaxWidth()

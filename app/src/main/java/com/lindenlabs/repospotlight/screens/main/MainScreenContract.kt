@@ -1,5 +1,7 @@
 package com.lindenlabs.repospotlight.screens.main
 
+import com.lindenlabs.repospotlight.data.models.RepoModel
+
 object MainScreenContract {
 
     sealed class ViewState {
@@ -11,5 +13,9 @@ object MainScreenContract {
 
         data class ErrorState(val throwable: Throwable) : ViewState()
 
+    }
+
+    sealed class ViewEvent {
+        data class NavigateToDetailScreen(val repoModel: RepoModel) : ViewEvent()
     }
 }

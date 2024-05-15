@@ -5,14 +5,18 @@ import javax.inject.Inject
 
 class MapRepoModelToSpotlightViewEntity @Inject constructor() {
 
-    operator fun invoke(repositories: List<RepoModel>): List<SpotlightRepoViewEntity> {
-        return repositories.map { it.toViewEntity() }
+    operator fun invoke(
+        repositories: List<RepoModel>,
+        clickAction: (repoModel: RepoModel) -> Unit
+    ): List<SpotlightRepoViewEntity> {
+        return repositories.map { it.toViewEntity(clickAction) }
     }
 
-    private fun RepoModel.toViewEntity(): SpotlightRepoViewEntity {
+    private fun RepoModel.toViewEntity(clickAction: (repoModel: RepoModel) -> Unit): SpotlightRepoViewEntity {
         return SpotlightRepoViewEntity(
             this,
-            isRelatedToAndroid = topics?.isAndroidRelated() == true
+            isRelatedToAndroid = topics?.isAndroidRelated() == true,
+            clickAction = clickAction
         )
     }
 
