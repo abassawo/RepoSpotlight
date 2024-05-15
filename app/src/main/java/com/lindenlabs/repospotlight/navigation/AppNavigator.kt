@@ -2,14 +2,9 @@ package com.lindenlabs.repospotlight.navigation
 
 import androidx.navigation.NavHostController
 import com.lindenlabs.repospotlight.data.models.RepoModel
-import com.lindenlabs.repospotlight.ui.components.navigation.BottomNavigationEntity
-import javax.inject.Inject
 
 class AppNavigator (val navController: NavHostController) {
     var selectedRepo: RepoModel? = null
-    fun isScreenSet(bottomNavigationItem: BottomNavigationEntity): Boolean {
-        return navController.currentDestination?.route == bottomNavigationItem.screen.route
-    }
 
     fun navigate(screen: Screen.Detail) {
         this.selectedRepo = screen.repoModel
@@ -19,6 +14,6 @@ class AppNavigator (val navController: NavHostController) {
     }
 
     fun goBack(){
-        navController.navigate(Screen.Home.route) // todo - investigate why navController.navigateUp() isnt working
+        navController.navigate(Screen.Home.route) // todo - investigate why navController.navigateUp() isn't working
     }
 }

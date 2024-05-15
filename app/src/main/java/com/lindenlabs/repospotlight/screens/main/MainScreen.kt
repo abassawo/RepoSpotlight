@@ -42,12 +42,8 @@ fun MainScreen(appNavigator: AppNavigator, modifier: Modifier) {
             viewModel,
             viewState.viewEntities,
             modifier
-        ).also {
-            Toast.makeText(LocalContext.current, "Size was ${viewState.viewEntities.size}", Toast.LENGTH_LONG).show()
-
-        }
+        )
     }
-
 }
 
 @Composable

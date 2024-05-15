@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-//    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -64,7 +64,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation("io.coil-kt:coil-compose:2.6.0")
-    implementation("androidx.browser:browser:1.3.0")
+    implementation("androidx.browser:browser:1.8.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     val timberVersion = "5.0.1"
     implementation("com.jakewharton.timber:timber:$timberVersion")

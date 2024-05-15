@@ -3,6 +3,7 @@ package com.lindenlabs.repospotlight.screens.main
 import com.lindenlabs.repospotlight.TestCoroutineRule
 import com.lindenlabs.repospotlight.TestData
 import com.lindenlabs.repospotlight.data.api.AppDataSource
+import com.lindenlabs.repospotlight.data.models.SpotlightRequest
 import com.lindenlabs.repospotlight.data.paging.SpotlightReposPagingSource
 import com.lindenlabs.repospotlight.whenever
 import junit.framework.TestCase.assertEquals
@@ -20,7 +21,8 @@ import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MainViewModelTest {
+class
+MainViewModelTest {
     private val mockDataSource: AppDataSource = mock(AppDataSource::class.java)
     private val pagingSource: SpotlightReposPagingSource =
         SpotlightReposPagingSource(mockDataSource)
@@ -64,7 +66,10 @@ class MainViewModelTest {
             arrangeBuilder.withNonEmptySpotlightRepos()
             val expectedEntities = mapper.invoke(listOf(TestData.repoModel))
             underTest = MainViewModel(testDispatcher, pagingSource, mapper)
-            assertEquals(MainScreenContract.ViewState.Spotlight(expectedEntities), underTest.viewState.value)
+            assertEquals(
+                MainScreenContract.ViewState.Spotlight(expectedEntities),
+                underTest.viewState.value
+            )
         }
     }
 
@@ -73,7 +78,38 @@ class MainViewModelTest {
         underTest = MainViewModel(testDispatcher, pagingSource, mapper)
         val repo = TestData.repoModel
         underTest.handleInteraction(MainScreenContract.Interaction.SpotlightRepoClicked(repo))
-        assertEquals(MainScreenContract.ViewEvent.NavigateToDetailScreen(repo), underTest.viewEvent.value)
+        assertEquals(
+            MainScreenContract.ViewEvent.NavigateToDetailScreen(repo),
+            underTest.viewEvent.value
+        )
+    }
+
+    @Test
+    fun `verify more than 100 items cannot be emitted when using interval divisible by 100`() {
+        testDispatcher.runBlockingTest {
+            arrangeBuilder.withNonEmptySpotlightRepos(SpotlightRequest().perPage)
+            underTest = MainViewModel(testDispatcher, pagingSource, mapper)
+            repeat(5) {
+                underTest.fetchTopRepos()
+            }
+
+            val viewState = underTest.viewState.value as MainScreenContract.ViewState.Spotlight
+            assert(viewState.viewEntities.size <= 100)
+        }
+    }
+
+    @Test
+    fun `verify more than 100 items cannot be emitted when using other intervals`() {
+        testDispatcher.runBlockingTest {
+            arrangeBuilder.withNonEmptySpotlightRepos(30)
+            underTest = MainViewModel(testDispatcher, pagingSource, mapper)
+            repeat(5) {
+                underTest.fetchTopRepos()
+            }
+
+            val viewState = underTest.viewState.value as MainScreenContract.ViewState.Spotlight
+            assert(viewState.viewEntities.size <= 100)
+        }
     }
 
     inner class ArrangeBuilder {
@@ -83,11 +119,10 @@ class MainViewModelTest {
             )
         }
 
-        suspend fun withNonEmptySpotlightRepos() = also {
+        suspend fun withNonEmptySpotlightRepos(listSize: Int = 1) = also {
             whenever(mockDataSource.getPopularRepos(anyInt())).thenReturn(
-                listOf(
-                    TestData.repoModel
-                )
+                MutableList(listSize) { TestData.repoModel }
+
             )
         }
     }

@@ -10,13 +10,8 @@ import com.lindenlabs.repospotlight.screens.main.MainScreenContract.ViewEvent.Na
 import com.lindenlabs.repospotlight.screens.main.MainScreenContract.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -32,6 +27,7 @@ class MainViewModel @Inject constructor(
     )
     val viewState: StateFlow<ViewState> = mutableViewState
     val viewEntities: MutableList<SpotlightRepoViewEntity> = mutableListOf()
+    var request = SpotlightRequest()
 
     private val mutableViewEvent: MutableStateFlow<ViewEvent?> =
         MutableStateFlow(
@@ -67,20 +63,20 @@ class MainViewModel @Inject constructor(
                                 ViewState.Empty
                         } else {
                             mutableViewState.value =
-                                ViewState.Spotlight(viewEntities)
+                                ViewState.Spotlight(viewEntities.take(100))
+                                // Defensive code - The number of elements emitted should not exceed 100 as long as we use a page size divisible by 100, e.g 25
                         }
                     }
                     .onFailure {
                         Timber.e("An error occurred $it")
-                        mutableViewState.value = MainScreenContract.ViewState.ErrorState(it)
+                        mutableViewState.value = ViewState.ErrorState(it)
                     }
                 request = request.copy(
-                    page = request.page + 1,
-                    perPage = 25
+                    page = request.page + 1
                 )
             }
         } else {
-            request = request.copy(page = 0, perPage = 25)
+            request = request.copy(page = 0)
         }
     }
 
@@ -90,8 +86,4 @@ class MainViewModel @Inject constructor(
                 mutableViewEvent.value = NavigateToDetailScreen(interaction.repoModel)
             }
         }
-
-    companion object {
-        var request = SpotlightRequest(1, 25)
-    }
 }
