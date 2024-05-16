@@ -51,13 +51,13 @@ class MainViewModel @Inject constructor(
 
                 runCatching {
                     spotlightPagingSource.load(params)
-                }.mapCatching { (it as? PagingSource.LoadResult.Page)?.data ?: emptyList() }
+                }.
+                mapCatching { (it as? PagingSource.LoadResult.Page)?.data ?: throw Exception("An error occurred") }
                     .mapCatching { mapElements(it) }
                     .onSuccess { repoViewEntities ->
                         viewEntities.addAll(repoViewEntities)
                         Timber.d("Repositories retrieved ${repoViewEntities.size}")
                         Timber.d("Repositories to be emitted ${viewEntities.size}")
-
                         if (viewEntities.isEmpty()) {
                             mutableViewState.value =
                                 ViewState.Empty

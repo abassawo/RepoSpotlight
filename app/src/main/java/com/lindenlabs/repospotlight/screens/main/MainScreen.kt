@@ -35,7 +35,7 @@ fun MainScreen(appNavigator: AppNavigator, modifier: Modifier) {
     }
 
     when (viewState) {
-        is MainScreenContract.ViewState.ErrorState -> GenericBox(title = "Error")
+        is MainScreenContract.ViewState.ErrorState -> GenericBox(title = "An error occurred")
         MainScreenContract.ViewState.Loading -> LoadingView()
         MainScreenContract.ViewState.Empty -> GenericBox(title = "Nothing to see here!")
         is MainScreenContract.ViewState.Spotlight -> SpotlightReposScreen(
