@@ -38,21 +38,9 @@ class AppRepository : AppDataSource {
     }
 
     companion object {
-        const val GITHUB_API_KEY = ""
         private val BASE_URL = "https://api.github.com"
         private val api = Retrofit.Builder().baseUrl(BASE_URL)
-            .client(OkHttpClient.Builder()
-                .addInterceptor { chain ->
-                    val request = chain.request().newBuilder()
-                        .apply {
-//                            if(GITHUB_API_KEY.isNotEmpty()) {
-                                addHeader("Authorization", "Bearer $GITHUB_API_KEY")
-//                            }
-                        }
-                        .build()
-                    chain.proceed(request)
-                }
-                .build())
+            .client(OkHttpClient())
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .build().create(SpotlightApi::class.java)
     }
